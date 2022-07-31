@@ -2,6 +2,19 @@ package stationery;
 
 import java.util.Scanner;
 
+interface PenPencilMarkerAB {
+	void write();
+
+	void draw();
+}
+
+interface PenMarkerAB extends PenPencilMarkerAB {
+	void capOpen();
+
+	void capClose();
+}
+
+//------------------------------------------------------------------------------------------------------------------
 //Level 1
 class stationery {
 	static {
@@ -16,25 +29,27 @@ class stationery {
 	String brand_name;
 	String type;
 
-	public void write() {
-		System.out.println("writing method");
-	}
-
-	public void draw() {
-		System.out.println("draw method");
-	}
-
-	public int getPrice() {
+//*****************************************************************************************
+	public int getPrice() { // Getter
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(int price) { // Setter
 		this.price = price;
 	}
 }
+//*****************************************************************************************
 
 //Level 2 Stationary
-class Pen extends stationery {
+class Pen extends stationery implements PenMarkerAB, PenPencilMarkerAB {
+
+	public void write() {
+		System.out.println("Pen is able to write");
+	}
+
+	public void draw() {
+		System.out.println("Pen is able to draw");
+	}
 
 	public void capOpen() {
 		System.out.println("Pen's cap is open");
@@ -44,18 +59,34 @@ class Pen extends stationery {
 		System.out.println("Pen's cap is closed");
 	}
 }
+//*****************************************************************************************
 
-class Pencil extends stationery {
+class Pencil extends stationery implements PenPencilMarkerAB {
+	public void write() {
+		System.out.println("Pencil is able to write");
+	}
 
+	public void draw() {
+		System.out.println("Pencil is able to draw");
+	}
 }
+//*****************************************************************************************
 
-class Marker extends stationery {
+class Marker extends stationery implements PenMarkerAB, PenPencilMarkerAB {
 	public void capOpen() {
 		System.out.println("Marker's cap is open");
 	}
 
 	public void capClose() {
 		System.out.println("Marker's cap is closed");
+	}
+
+	public void write() {
+		System.out.println("Marker is able to write");
+	}
+
+	public void draw() {
+		System.out.println("Marker is able to draw");
 	}
 }
 
@@ -109,7 +140,6 @@ class Flair extends Gel {
 }
 
 class Pentonic extends Gel {
-
 	String brand_name = "Pentonic";
 }
 
@@ -209,6 +239,14 @@ class Racer extends Reynolds {
 }
 
 class Lumino extends Reynolds {
+	// ******-------------------------------------------------------------------------------------------
+	// Level 5
+	// Gelpen->Reynolds**************************************************************************************************
+	class Racer extends Reynolds {
+		String name = "Racer Gel";
+
+	}
+
 	String name = "Lumino Gel";
 
 }
@@ -493,13 +531,19 @@ public class Driver {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
 
-		switch (n) {
+		switch (n) { // choose between pen/pencil/marker
 		default:
 			System.out.println("Please choose Between 1 to 3 numbers only");
 			break;
 		case 1:
 			System.out.println("You have selected Pen");
-
+			System.out.println("******************************");
+			Pen Pen_1 = new Pen();
+			Pen_1.write();
+			Pen_1.draw();
+			Pen_1.capOpen();
+			Pen_1.capClose();
+			System.out.println("******************************");
 			System.out.println("Press 1 for Gel");
 			System.out.println("Press 2 for Ballpoint");
 			System.out.println("Press 3 for Fountain");
@@ -513,6 +557,7 @@ public class Driver {
 
 				stationery GelPen1 = new Gel();
 				Gel gel1 = (Gel) GelPen1;
+
 				System.out.println("You have selected " + gel1.type);
 				System.out.println("Type of selected pen is:- " + gel1.type);
 				System.out.println("******************");
@@ -1089,6 +1134,11 @@ public class Driver {
 
 		case 2:
 			System.out.println("You have selected Pencil");
+			System.out.println("******************************");
+			Pencil Pencil_1 = new Pencil();
+			Pencil_1.write();
+			Pencil_1.draw();
+			System.out.println("******************************");
 
 			System.out.println("Press 1 for Mechanical");
 			System.out.println("Press 2 for Graphite");
@@ -1122,7 +1172,7 @@ public class Driver {
 					Pilot_Mechanical Pil_mech1 = (Pilot_Mechanical) Reynolds1;
 					System.out.println("You have selected " + Pil_mech1.brand_name);
 
-					System.out.println("******************");
+					System.out.println("***********************************");
 					System.out.println("Press 1 for Rexgrip");
 					System.out.println("Press 2 for Progrex");
 					System.out.println("Press 3 for H_329");
@@ -1245,7 +1295,7 @@ public class Driver {
 				System.out.println("Type of selected pencil is:- " + Graph1.type);
 				System.out.println("******************");
 				System.out.println("Press 1 for HindustanPencil_Graphite");
-				System.out.println("Press 2 for Cello");
+				System.out.println("Press 2 for DOMS");
 
 				int Graphite = sc.nextInt();
 
@@ -1472,6 +1522,13 @@ public class Driver {
 
 		case 3:
 			System.out.println("You have selected Marker");
+			System.out.println("******************************");
+			Marker Marker_1 = new Marker();
+			Marker_1.write();
+			Marker_1.draw();
+			Marker_1.capOpen();
+			Marker_1.capClose();
+			System.out.println("******************************");
 
 			System.out.println("Press 1 for Permanent");
 			System.out.println("Press 2 for Whiteboard");
