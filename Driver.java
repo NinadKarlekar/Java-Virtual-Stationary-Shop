@@ -1,4 +1,4 @@
-package stationery;
+//package stationery;
 
 import java.util.Scanner;
 
